@@ -10,7 +10,7 @@ import (
 )
 
 /*LeoTweets lee los tweets de un perfil */
-func LeoTweets(ID string, pagina int64) ([]*models.DevuelvoTweets, bool) {
+func LeoTweets(ID string, pagina, size int64) ([]*models.DevuelvoTweets, bool) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 	db := MongoCN.Database("twitt")
@@ -23,9 +23,9 @@ func LeoTweets(ID string, pagina int64) ([]*models.DevuelvoTweets, bool) {
 	}
 
 	opciones := options.Find()
-	opciones.SetLimit(20)
+	opciones.SetLimit(size)
 	opciones.SetSort(bson.D{{Key: "fecha", Value: -1}})
-	opciones.SetSkip((pagina - 1) * 20)
+	opciones.SetSkip((pagina - 1) * size)
 
 	cursor, err := col.Find(ctx, condicion, opciones)
 	if err != nil {
