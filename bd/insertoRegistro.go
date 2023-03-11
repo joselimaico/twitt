@@ -14,8 +14,8 @@ func InsertoRegistro(u models.Usuario) (string, bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
-	db := MongoCN.Database("twittor")
-	col := db.Collection("usuarios")
+	db := MongoCN.Database("twitt")
+	col := db.Collection("users")
 
 	u.Password, _ = EncriptarPassword(u.Password)
 
