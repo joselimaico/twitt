@@ -2,6 +2,7 @@ package bd
 
 import (
 	"context"
+	"github.com/joselimaico/twitt/constants"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
@@ -9,7 +10,9 @@ import (
 
 // MongoCN es el objeto de conexión a la BD
 var MongoCN = ConectarBD()
-var clientOptions = options.Client().ApplyURI("mongodb+srv://jfl_96:0PwPY36gGKY2wunb@cluster-px3sbnfz.g9x7l.mongodb.net/?retryWrites=true&w=majority")
+
+var uriConnection = constants.MongoURI
+var clientOptions = options.Client().ApplyURI(uriConnection)
 
 // ConectarBD se conecta a la base de datos
 func ConectarBD() *mongo.Client {
